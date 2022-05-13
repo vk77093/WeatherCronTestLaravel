@@ -57,7 +57,10 @@ class DailyWeatherAddData extends Command
                         return response()->json('Their are not got any value');
                     }else{
                         foreach($dataGot['daily'] as $daily){
+                           
+                            foreach($daily['weather'] as $weather){
                             $dataAdded=DailyWeatherModel::create([
+                                
                                 'longitude'=>$dataGot['lon'],
                             'latitude'=>$dataGot['lat'],
                             'timezone'=>$dataGot['timezone'],
@@ -68,12 +71,40 @@ class DailyWeatherAddData extends Command
                              'moonrise'=>$this->ConverVertNumberTodate($daily['moonrise']),
                              'moonset'=>$this->ConverVertNumberTodate($daily['moonset']),
                              'moon_phase'=>$daily['moon_phase'],
+                             'temp_day'=>$daily['temp']['day'],
+                             'min'=>$daily['temp']['min'],
+                             'max'=>$daily['temp']['max'],
+                             'night'=>$daily['temp']['night'],
+                             'eve'=>$daily['temp']['eve'],
+                             'morn'=>$daily['temp']['morn'],
+                             'feels_like_day'=>$daily['feels_like']['day'],
+                             'feels_like_night'=>$daily['feels_like']['night'],
+                             'feels_like_eve'=>$daily['feels_like']['eve'],
+                             'feels_like_morn'=>$daily['feels_like']['morn'],
+                             'pressure'=>$daily['pressure'],
+                             'humidity'=>$daily['humidity'],
+                             'dew_point'=>$daily['dew_point'],
+                             'wind_speed'=>$daily['wind_speed'],
+                             'wind_deg'=>$daily['wind_deg'],
+                             'wind_gust'=>$daily['wind_gust'],
+
+                             'weather_id'=>$weather['id'],
+                            'main'=>$weather['main'],
+                            'description'=>$weather['description'],
+                            'icon'=>$weather['icon'],
+
+                            'clouds'=>$daily['clouds'],
+                            'pop'=>$daily['pop'],
+                             
+                             
+                            'uvi'=>$daily['uvi'],
                             ]);
+                          }
                         }
                         $dataAdded2=$this->withProgressBar(DailyWeatherModel::all(), function ($dataAdde){
 
                         });
-                        $this->info('The command was successful!');
+                        $this->info('  The command was successful!');
                     }
                 }
                 

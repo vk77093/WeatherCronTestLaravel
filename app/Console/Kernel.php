@@ -17,12 +17,14 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\AddWeatherData::class,
         Commands\HourlyAddData::class,
+        Commands\DailyWeatherAddData::class,
     ];
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('WeatherDataAdd')->dailyAt('3:00');
         $schedule->command('hourlyadd')->dailyAt('3:00');
+        $schedule->command('DailyWeatherAdd')->dailyAt('2:00');
     }
 
     /**

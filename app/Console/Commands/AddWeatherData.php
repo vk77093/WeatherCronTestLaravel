@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Exception;
 use App\Models\LatModel;
 use App\Models\CityCodes;
+use Illuminate\Support\Facades\Log;
 
 class AddWeatherData extends Command
 {
@@ -112,6 +113,7 @@ class AddWeatherData extends Command
            $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
             return $WeatherData;
         }catch(\Exception $e){
+            Log::info($e->getMessage());
             return response()->json('Connection not created'.$e->getMessage());
         }
     }

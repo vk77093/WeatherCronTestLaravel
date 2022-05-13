@@ -117,6 +117,7 @@ class DailyWeatherAddData extends Command
             return $WeatherData;
         }catch(\Exception $e){
             //need to add the log files 
+           
             return response()->json('Connection not created'.$e->getMessage());
         }
     }

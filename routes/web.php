@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+use Illuminate\Support\Facades\Log;
+Route::get('/logs', function () {
+    Log::channel('custom_error')->error('Something happened erros!');
+    Log::channel('custom_debug')->info('Something happened debugs!');
+    return view('welcome');
+});

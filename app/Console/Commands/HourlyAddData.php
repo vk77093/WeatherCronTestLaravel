@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 use App\Models\HourlyModel;
 use App\Models\CityCodes;
+use Illuminate\Support\Facades\Log;
 
 class HourlyAddData extends Command
 {
@@ -112,7 +113,7 @@ class HourlyAddData extends Command
            $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
             return $WeatherData;
         }catch(\Exception $e){
-            //need to add the log files 
+            Log::channel('Hourly_WeatherError')->error($e->getMessage());
             return response()->json('Connection not created'.$e->getMessage());
         }
     }

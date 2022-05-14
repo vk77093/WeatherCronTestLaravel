@@ -113,6 +113,27 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        //Added custom logs files
+        'Current_WeatherError' => [
+            'driver' => 'single',
+            'level'  => 'error',
+            'path'   => storage_path('logs/Current_WeatherError.log'),
+            'bubble' => false
+        ],
+        'Daily_WeatherError' => [
+            'driver' => 'single',
+            'level'  => 'error',
+            'path'   => storage_path('logs/Daily_WeatherError.log'),
+            'bubble' => false
+        ],
+        'Hourly_WeatherError' => [
+            'driver' => 'single',
+            'level'  => 'error',
+            'path'   => storage_path('logs/Hourly_WeatherError.log'),
+            'bubble' => false
+        ],
+        // End of added custom logs files
+
     ],
 
 ];

@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\CityCodes;
 use App\Models\DailyWeatherModel;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class DailyWeatherAddData extends Command
 {
@@ -116,7 +117,7 @@ class DailyWeatherAddData extends Command
            $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
             return $WeatherData;
         }catch(\Exception $e){
-            //need to add the log files 
+            Log::channel('Daily_WeatherError')->error($e->getMessage());
            
             return response()->json('Connection not created'.$e->getMessage());
         }

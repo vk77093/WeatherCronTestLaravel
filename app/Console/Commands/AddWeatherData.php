@@ -113,7 +113,7 @@ class AddWeatherData extends Command
            $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
             return $WeatherData;
         }catch(\Exception $e){
-            Log::info($e->getMessage());
+            Log::channel('Current_WeatherError')->error($e->getMessage());
             return response()->json('Connection not created'.$e->getMessage());
         }
     }

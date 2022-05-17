@@ -64,7 +64,7 @@ class HourlyAddData extends Command
                 foreach($dataGot['hourly'] as $hour){
                     foreach($hour['weather'] as $weather){
                         $currentDtConvert=$hour['dt'];
-                        $dataAdded=HourlyModel::create([
+                        $dataAdded=HourlyModel::updateOrCreate([
                             'longitude'=>$dataGot['lon'],
                             'latitude'=>$dataGot['lat'],
                             'timezone'=>$dataGot['timezone'],

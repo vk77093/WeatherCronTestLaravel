@@ -60,7 +60,7 @@ class DailyWeatherAddData extends Command
                         foreach($dataGot['daily'] as $daily){
                            
                             foreach($daily['weather'] as $weather){
-                            $dataAdded=DailyWeatherModel::create([
+                            $dataAdded=DailyWeatherModel::updateOrCreate([
                                 
                                 'longitude'=>$dataGot['lon'],
                             'latitude'=>$dataGot['lat'],
@@ -114,8 +114,11 @@ class DailyWeatherAddData extends Command
     }
     private function GetWeatherDataMethod($lat,$lon){
         try{
-           $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
+           $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)
+         ->json();
+           
             return $WeatherData;
+
         }catch(\Exception $e){
             Log::channel('Daily_WeatherError')->error($e->getMessage());
            
@@ -123,7 +126,7 @@ class DailyWeatherAddData extends Command
         }
     }
     private function ConverVertNumberTodate($number){
-        $date=date("Y-m-d H:i:s", $number);
+        $date=date("Y-m-d H:i:00", $number);
         return $date;
     }
     private function getAllCities(){

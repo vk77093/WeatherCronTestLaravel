@@ -72,7 +72,7 @@ class AddWeatherData extends Command
                 }
                 
     
-            $dataAdded=LatModel::create([
+            $dataAdded=LatModel::updateOrCreate([
                 'longitude'=>$dataGot['lon'],
                 'latitude'=>$dataGot['lat'],
                 'timezone'=>$dataGot['timezone'],
@@ -118,7 +118,7 @@ class AddWeatherData extends Command
         }
     }
     private function ConverVertNumberTodate($number){
-        $date=date("Y-m-d H:i:s:a", $number);
+        $date=date("Y-m-d H:i:00", $number);
         return $date;
     }
     private function getAllCities(){

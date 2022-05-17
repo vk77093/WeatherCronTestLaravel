@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Exception;
 use App\Models\LatModel;
 use App\Models\CityCodes;
 use Illuminate\Support\Facades\Log;
+use DateTime;
+use DateTimezone;
 
 class AddWeatherData extends Command
 {
@@ -118,8 +120,12 @@ class AddWeatherData extends Command
         }
     }
     private function ConverVertNumberTodate($number){
-        $date=date("Y-m-d H:i:00", $number);
-        return $date;
+        // $date=date("Y-m-d H:i:00", $number);
+        // return $date;
+        $dt = new DateTime('@' . $number);
+$dt->setTimezone(new DateTimezone('Asia/Kolkata'));
+ $dt->format('Y-m-d H:i:00');
+ return $dt;
     }
     private function getAllCities(){
         $citiesData=CityCodes::get();

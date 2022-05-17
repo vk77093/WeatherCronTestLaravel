@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Http;
 use App\Models\HourlyModel;
 use App\Models\CityCodes;
 use Illuminate\Support\Facades\Log;
-
+use DateTime;
+use DateTimezone;
 class HourlyAddData extends Command
 {
     /**
@@ -118,8 +119,15 @@ class HourlyAddData extends Command
         }
     }
     private function ConverVertNumberTodate($number){
-        $date=date("Y-m-d H:i:s", $number);
-        return $date;
+        // $date=date("Y-m-d H:i:s", $number);
+        // return $date;
+       
+$dt = new DateTime('@' . $number);
+$dt->setTimezone(new DateTimezone('Asia/Tokyo'));
+ $dt->format('Y-m-d H:i:s');
+ return $dt;
+
+        
     }
     private function getAllCities(){
         $citiesData=CityCodes::get();

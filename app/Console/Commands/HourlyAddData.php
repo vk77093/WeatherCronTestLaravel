@@ -117,10 +117,10 @@ class HourlyAddData extends Command
            $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
             return $WeatherData;
         }catch(\Exception $e){
-            // logging the expection in the file if something goes wrong
-            // location of the file in storage
-            // we need to make the one function for purge the logs after
-            // some interval of the time
+            /* logging the expection in the file if something goes wrong
+             location of the file in storage
+             we need to make the one function for purge the logs after
+            some interval of the time */
             Log::channel('Hourly_WeatherError')->error($e->getMessage());
             return response()->json('Connection not created'.$e->getMessage());
         }

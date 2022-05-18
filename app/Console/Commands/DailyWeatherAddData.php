@@ -120,6 +120,10 @@ class DailyWeatherAddData extends Command
             return $WeatherData;
 
         }catch(\Exception $e){
+            /* logging the expection in the file if something goes wrong
+             location of the file in storage
+             we need to make the one function for purge the logs after
+            some interval of the time */
             Log::channel('Daily_WeatherError')->error($e->getMessage());
            
             return response()->json('Connection not created'.$e->getMessage());

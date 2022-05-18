@@ -49,6 +49,9 @@ class HourlyAddData extends Command
     {
        if($this->confirm('Do you want to execute?')){
         $citiesData=$this->getAllCities();
+        /* getting all the cities and loop through them 
+        for get the data for the each cities */
+        
         if($citiesData !=null){
             foreach($citiesData as $data){
                
@@ -114,6 +117,10 @@ class HourlyAddData extends Command
            $WeatherData=Http::Get($this->baseUrl."?lat=$lat&lon=$lon&units=metric&appid=".$this->apiKey)->json();
             return $WeatherData;
         }catch(\Exception $e){
+            // logging the expection in the file if something goes wrong
+            // location of the file in storage
+            // we need to make the one function for purge the logs after
+            // some interval of the time
             Log::channel('Hourly_WeatherError')->error($e->getMessage());
             return response()->json('Connection not created'.$e->getMessage());
         }
@@ -121,7 +128,13 @@ class HourlyAddData extends Command
     private function ConverVertNumberTodate($number){
         // $date=date("Y-m-d H:i:s", $number);
         // return $date;
-       
+     /* for setting the time stamp 
+        now added that into cofig/app.php changed the
+        time zone to the UTC to America/Toronto
+        */  
+        // checking the timezone for the india time
+        // upper code will working fine remove it into the
+        // live site
 $dt = new DateTime('@' . $number);
 $dt->setTimezone(new DateTimezone('Asia/Tokyo'));
  $dt->format('Y-m-d H:i:s');
@@ -133,4 +146,5 @@ $dt->setTimezone(new DateTimezone('Asia/Tokyo'));
         $citiesData=CityCodes::get();
         return $citiesData;
     }
+    
 }

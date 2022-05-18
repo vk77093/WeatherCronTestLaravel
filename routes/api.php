@@ -27,3 +27,5 @@ Route::get("/latadd",[OpenWeatherFetchCont::class,'AddWeatherData']);
 Route::get("/date",[OpenWeatherFetchCont::class,'ConverVertNumberTodateTest']);
 
 Route::get("/cities",[OpenWeatherFetchCont::class,'getAllCities']);
+
+Route::get("/checkcount",[OpenWeatherFetchCont::class,'checkCountWeather']);

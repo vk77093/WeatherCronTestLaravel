@@ -82,6 +82,7 @@ return response()->json(array('data' => $dataAdded));
     public function ConverVertNumberTodateTest(){
         $number='1652318357';
         $date=date("Y-m-d h:i:sa", $number);
+        
         //$date=Carbon::parse($number)->format('Y-m-d H:i:s');
         echo $date;
     }
@@ -93,5 +94,19 @@ return response()->json(array('data' => $dataAdded));
         $citiesData=CityCodes::get();
         dd($citiesData);
 
+    }
+    public function checkCountWeather(){
+        try{
+           $WeatherData=Http::Get($this->baseUrl."?lat=31.32&lon=75.57&units=metric&appid=".$this->apiKey)->json();
+       
+        for ($i=0; $i < $WeatherData['daily']; $i++) { 
+          
+        }
+        
+          
+        }catch(\Exception $e){
+            // Log::channel('Hourly_WeatherError')->error($e->getMessage());
+            return response()->json('Connection not created'.$e->getMessage());
+        }
     }
 }

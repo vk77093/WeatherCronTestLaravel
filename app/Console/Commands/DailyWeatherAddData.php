@@ -57,6 +57,7 @@ class DailyWeatherAddData extends Command
                         $this->error('Something went wrong!');
                         return response()->json('Their are not got any value');
                     }else{
+                       // foreach(array_slice((array))){
                         foreach($dataGot['daily'] as $daily){
                            
                             foreach($daily['weather'] as $weather){

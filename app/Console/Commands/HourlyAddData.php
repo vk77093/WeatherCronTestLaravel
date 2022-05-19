@@ -64,8 +64,9 @@ class HourlyAddData extends Command
                 return response()->json('Their are not got any value');
     
             }else{
-                
-                foreach($dataGot['hourly'] as $hour){
+               // array_slice((array)$response->hourly, 0 , 24)
+                //foreach($dataGot['hourly'] as $hour){
+               foreach(array_slice((array)$dataGot['hourly'], 0 , 24) as $hour){
                     foreach($hour['weather'] as $weather){
                         $currentDtConvert=$hour['dt'];
                         $dataAdded=HourlyModel::updateOrCreate([
